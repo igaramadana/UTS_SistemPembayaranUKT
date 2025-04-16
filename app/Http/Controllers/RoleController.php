@@ -148,6 +148,7 @@ class RoleController extends Controller
                 return response()->json(['success' => false], 404);
             }
         }
+        showNotification('error', 'Gagal menghapus data role');
         return redirect()->route('role.index');
     }
 }
