@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\JurusanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ Route::get('/mahasiswa', function () {
 Route::group(['prefix' => 'role'], function () {
     Route::get('/', [RoleController::class, 'index'])->name('role.index');
     Route::get('/list', [RoleController::class, 'list'])->name('role.list');
-    Route::get('/create', [RoleController::class, 'create'])->name('role.create');
     Route::post('/store', [RoleController::class, 'store'])->name('role.store');
     // Show Detail
     Route::get('/detail/{id}', [RoleController::class, 'show'])->name('role.show');
@@ -36,4 +36,18 @@ Route::group(['prefix' => 'role'], function () {
     // Delete
     Route::get('/{id}/delete', [RoleController::class, 'confirm'])->name('role.confirm');
     Route::delete('/{id}/delete', [RoleController::class, 'delete'])->name('role.delete');
+});
+
+Route::group(['prefix' => 'jurusan'], function () {
+    Route::get('/', [JurusanController::class, 'index'])->name('jurusan.index');
+    Route::get('/list', [JurusanController::class, 'list'])->name('jurusan.list');
+    Route::post('/store', [JurusanController::class, 'store'])->name('jurusan.store');
+    // Show Detail
+    Route::get('/detail/{id}', [JurusanController::class, 'show'])->name('jurusan.show');
+    // Edit
+    Route::get('/{id}/edit', [JurusanController::class, 'edit'])->name('jurusan.edit');
+    Route::put('/{id}/update', [JurusanController::class, 'update'])->name('jurusan.update');
+    // Delete
+    Route::get('/{id}/delete', [JurusanController::class, 'confirm'])->name('jurusan.confirm');
+    Route::delete('/{id}/delete', [JurusanController::class, 'delete'])->name('jurusan.delete');
 });

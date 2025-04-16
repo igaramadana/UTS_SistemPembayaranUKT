@@ -65,6 +65,22 @@
                     </ul>
                 </li>
 
+                {{-- Data Jurusan --}}
+                <li class="sidebar-item has-sub {{ $activeMenu == 'jurusan' ? 'active' : '' }}">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-bookmarks-fill"></i>
+                        <span>Data Jurusan</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="{{ route('jurusan.index') }}"
+                                class="submenu-link {{ $activeMenu == 'jurusan' ? 'active' : '' }}">
+                                Daftar Jurusan
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
