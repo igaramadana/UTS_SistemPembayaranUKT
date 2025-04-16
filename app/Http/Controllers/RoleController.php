@@ -102,7 +102,7 @@ class RoleController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return response()->json(['success' => false, 'errors' => $validator->errors()]);
+                return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
             }
 
             $check = RoleModel::find($id);
@@ -134,7 +134,7 @@ class RoleController extends Controller
         }
     }
 
-    public function delete(Request $request, string $id)
+    public function delete(Request $request)
     {
         if ($request->ajax() || $request->wantsJson()) {
             $role = RoleModel::find($request->id);
