@@ -113,25 +113,6 @@
                     </a>
                 </li>
 
-
-                <li class="sidebar-item has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
-                        <span>Data Mahasiswa</span>
-                    </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="mahasiswa.html" class="submenu-link">Daftar Mahasiswa</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="tambah-mahasiswa.html" class="submenu-link">Tambah Mahasiswa</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="import-mahasiswa.html" class="submenu-link">Import Data</a>
-                        </li>
-                    </ul>
-                </li>
-
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-cash-stack"></i>
