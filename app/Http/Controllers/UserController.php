@@ -6,6 +6,7 @@ use App\Models\RoleModel;
 use App\Models\UserModel;
 use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
+use App\Models\MahasiswaModel;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -20,6 +21,7 @@ class UserController extends Controller
     }
     public function index()
     {
+        $mahasiswa = MahasiswaModel::where('user_id')->with('prodi')->first();
         $breadcrumb = (object) [
             'title' => 'User',
             'list' => ['Data Master', 'User'],
@@ -42,7 +44,9 @@ class UserController extends Controller
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('foto_profile', function ($user) {
-                return '<img src="' . $this->avatar->create($user->email)->tobase64() . '" width="50" class="avatar border border-3 border-primary">';
+                $mahasiswa = MahasiswaModel::where('user_id', $user->user_id)->first();
+                $avatarImage = $mahasiswa ? $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64() : '';
+                return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary">';
             })
             ->addColumn('action', function ($user) {
                 $btn = '<a href="' . route('user.show', $user->user_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
@@ -54,37 +58,18 @@ class UserController extends Controller
             ->make(true);
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8',
-            'role_id' => 'required|exists:role,role_id',
-        ]);
-
-        try {
-            UserModel::create([
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role_id' => $request->role_id,
-            ]);
-
-            showNotification('success', 'Data user berhasil ditambahkan');
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            showNotification('error', 'Gagal menambahkan data user');
-            return response()->json(['success' => false], 500);
-        }
-    }
-
     public function show(string $id)
     {
         $users = UserModel::find($id);
         $role = RoleModel::select('role_id', 'role_code', 'role_nama')->get();
 
-        $avatar = new Avatar();
-        $avatar->create($users->email)->toBase64();
+        $mahasiswa = MahasiswaModel::where('user_id', $id)->with('prodi')->first();
+
+        if (!$mahasiswa) {
+            return redirect()->route('user.index')->with('error', 'Data mahasiswa tidak ditemukan.');
+        }
+
+        $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
 
         $breadcrumb = (object) [
             'title' => 'User',
@@ -95,7 +80,7 @@ class UserController extends Controller
         ];
         $activeMenu = 'user';
 
-        return view('user.show', compact('breadcrumb', 'page', 'activeMenu', 'users', 'role', 'avatar'));
+        return view('user.show', compact('breadcrumb', 'page', 'activeMenu', 'users', 'role', 'avatar', 'mahasiswa'));
     }
 
     public function confirm(string $id)
