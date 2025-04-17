@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RoleModel;
 use App\Models\UserModel;
+use App\Models\AdminModel;
 use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
 use App\Models\MahasiswaModel;
@@ -21,7 +22,6 @@ class UserController extends Controller
     }
     public function index()
     {
-        $mahasiswa = MahasiswaModel::where('user_id')->with('prodi')->first();
         $breadcrumb = (object) [
             'title' => 'User',
             'list' => ['Data Master', 'User'],
@@ -44,13 +44,21 @@ class UserController extends Controller
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('foto_profile', function ($user) {
-                $mahasiswa = MahasiswaModel::where('user_id', $user->user_id)->first();
-                $avatarImage = $mahasiswa ? $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64() : '';
+                if ($user->role_id == 1) {
+                    $admin = AdminModel::where('user_id', $user->user_id)->first();
+                    $nama = $admin ? $admin->admin_nama : $user->username;
+                } else if ($user->role_id == 2) {
+                    $mahasiswa = MahasiswaModel::where('user_id', $user->user_id)->first();
+                    $nama = $mahasiswa ? $mahasiswa->mahasiswa_nama : $user->username;
+                } else {
+                    $nama = $user->email;
+                }
+
+                $avatarImage = $this->avatar->create($nama)->toBase64();
                 return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary">';
             })
             ->addColumn('action', function ($user) {
                 $btn = '<a href="' . route('user.show', $user->user_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
-                // $btn .= '<button onclick="modalAction(\'' . route('user.edit', $user->user_id) . '\')" class="btn btn-warning btn-sm btn-edit">Edit</button> ';
                 $btn .= '<button onclick="modalAction(\'' . url('/user/' . $user->user_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
                 return $btn;
             })
@@ -60,16 +68,30 @@ class UserController extends Controller
 
     public function show(string $id)
     {
-        $users = UserModel::find($id);
+        $user = UserModel::find($id);
         $role = RoleModel::select('role_id', 'role_code', 'role_nama')->get();
 
-        $mahasiswa = MahasiswaModel::where('user_id', $id)->with('prodi')->first();
+        if ($user->role_id == 1) { // Asumsi role_id 1 adalah admin
+            $admin = AdminModel::where('user_id', $id)->first();
 
-        if (!$mahasiswa) {
-            return redirect()->route('user.index')->with('error', 'Data mahasiswa tidak ditemukan.');
+            if (!$admin) {
+                return redirect()->route('user.index')->with('error', 'Data admin tidak ditemukan.');
+            }
+
+            $detailData = $admin;
+            $avatar = $this->avatar->create($admin->admin_nama)->toBase64();
+        } elseif ($user->role_id == 2) {
+            $mahasiswa = MahasiswaModel::where('user_id', $id)->with('prodi')->first();
+
+            if (!$mahasiswa) {
+                return redirect()->route('user.index')->with('error', 'Data mahasiswa tidak ditemukan.');
+            }
+
+            $detailData = $mahasiswa;
+            $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
+        } else {
+            $avatar = $this->avatar->create($user->email)->toBase64();
         }
-
-        $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
 
         $breadcrumb = (object) [
             'title' => 'User',
@@ -80,7 +102,7 @@ class UserController extends Controller
         ];
         $activeMenu = 'user';
 
-        return view('user.show', compact('breadcrumb', 'page', 'activeMenu', 'users', 'role', 'avatar', 'mahasiswa'));
+        return view('user.show', compact('breadcrumb', 'page', 'activeMenu', 'user', 'detailData', 'role', 'avatar'));
     }
 
     public function confirm(string $id)

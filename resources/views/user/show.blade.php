@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="card-body">
-            @empty($users)
+            @empty($user)
             <div class="alert alert-danger">
                 <h5><i class="bi bi-exclamation-triangle-fill"></i> Data tidak ditemukan</h5>
             </div>
@@ -26,15 +26,15 @@
                             width="100%">
                             <tr>
                                 <th>ID User</th>
-                                <td>{{ $users->user_id }}</td>
+                                <td>{{ $user->user_id }}</td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td>{{ $users->email }}</td>
+                                <td>{{ $user->email }}</td>
                             </tr>
                             <tr>
                                 <th>Role</th>
-                                <td>{{ $users->role->role_nama }}</td>
+                                <td>{{ $user->role->role_nama }}</td>
                             </tr>
                         </table>
                     </div>
