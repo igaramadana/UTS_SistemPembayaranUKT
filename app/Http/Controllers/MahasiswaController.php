@@ -57,10 +57,10 @@ class MahasiswaController extends Controller
                 return '<img src="' . $this->avatar->create($mahasiswa->mahasiswa_nama)->tobase64() . '" width="50" class="avatar border border-3 border-primary">';
             })
             ->addColumn('action', function ($mahasiswa) {
-                // $btn = '<a href="' . route('mahasiswa.show', $mahasiswa->mahasiswa_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
+                $btn = '<a href="' . route('mahasiswa.show', $mahasiswa->mahasiswa_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
                 // $btn .= '<button onclick="modalAction(\'' . route('mahasiswa.edit', $mahasiswa->mahasiswa_id) . '\')" class="btn btn-warning btn-sm btn-edit">Edit</button> ';
                 // $btn .= '<button onclick="modalAction(\'' . url('/mahasiswa/' . $mahasiswa->mahasiswa_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
-                // return $btn;
+                return $btn;
             })
             ->rawColumns(['foto_profile', 'action'])
             ->make(true);
@@ -116,5 +116,25 @@ class MahasiswaController extends Controller
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Gagal menambahkan data mahasiswa'], 500);
         }
+    }
+
+    public function show(string $id)
+    {
+        $mahasiswa = MahasiswaModel::find($id);
+        $prodi = ProdiModel::select('prodi_id', 'prodi_nama')->get();
+        $user = UserModel::find($mahasiswa->user_id);
+
+        $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
+
+        $breadcrumb = (object) [
+            'title' => 'Mahasiswa',
+            'list' => ['Data Master', 'Mahasiswa', 'Detail'],
+        ];
+        $page = (object) [
+            'title' => 'Detail Mahasiswa',
+        ];
+        $activeMenu = 'mahasiswa';
+
+        return view('mahasiswa.show', compact('breadcrumb', 'page', 'activeMenu', 'mahasiswa', 'prodi', 'user', 'avatar'));
     }
 }

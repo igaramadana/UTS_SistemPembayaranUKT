@@ -92,5 +92,7 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['prefix' => 'mahasiswa'], function () {
     Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
     Route::get('/list', [MahasiswaController::class, 'list'])->name('mahasiswa.list');
+    Route::post('/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
     // show detail
+    Route::get('/detail/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
 });
