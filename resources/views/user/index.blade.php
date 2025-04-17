@@ -8,12 +8,6 @@
                     <div class="col-sm text-start">
                         <h5 class="card-title mb-0">{{ $page->title }}</h5>
                     </div>
-                    <div class="col-sm text-end">
-                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#border-less">
-                            <i class="bi bi-plus-circle me-1"></i> Tambah Data
-                        </button>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -37,74 +31,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal Tambah -->
-    <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-white">Tambah Data User</h5>
-                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x" class="text-white"></i>
-                    </button>
-                </div>
-                <form id="formTambahUser" action="{{ route('user.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="email">Email User</label>
-                                        <input type="email" id="email" class="form-control" name="email"
-                                            placeholder="Masukkan Email User" required>
-                                        <div class="invalid-feedback" id="email_error"></div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="password">Password User</label>
-                                        <input type="password" id="password" class="form-control" name="password"
-                                            placeholder="Masukkan Password User" required maxlength="50">
-                                        <div class="invalid-feedback" id="password_error"></div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="password_confirmation">Konfirmasi Password</label>
-                                        <input type="password" id="password_confirmation" class="form-control" name="password_confirmation"
-                                            placeholder="Konfirmasi Password User" required maxlength="50">
-                                        <div class="invalid-feedback" id="password_confirmation_error"></div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="role_id">Role</label>
-                                        <select name="role_id" id="role_id" class="form-control" required>
-                                            <option value="">-- Pilih Role --</option>
-                                            @foreach ($role as $list)
-                                                <option value="{{ $list->role_id }}">{{ $list->role_nama }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="invalid-feedback" id="role_id_error"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                            <i class="bi bi-x"></i> Tutup
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-check"></i> Simpan
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     {{-- Confirmation Modal --}}
     <div id="myModal" class="modal fade text-left modal-borderless" tabindex="-1" role="dialog"
