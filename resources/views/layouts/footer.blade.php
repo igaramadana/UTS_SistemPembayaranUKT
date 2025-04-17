@@ -5,7 +5,7 @@
         </div>
         <div class="float-end">
             <p>Coded with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                by <a href="https://github.com/Igaramadana/">Igaramadana</a></p>
+                by <a href="{{ route('avv') }}">Igaramadana</a></p>
         </div>
     </div>
 </footer>

@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\MahasiswaController;
 use Illuminate\Foundation\Console\RouteListCommand;
 
 /*
@@ -22,6 +23,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+Route::get('/avv', function () {
+    return view('routefooter');
+})->name('avv');
 
 Route::get('/mahasiswa', function () {
     return view('mahasiswa.index');
@@ -82,4 +86,11 @@ Route::group(['prefix' => 'user'], function () {
     // Delete
     Route::get('/{id}/delete', [UserController::class, 'confirm'])->name('user.confirm');
     Route::delete('/{id}/delete', [UserController::class, 'delete'])->name('user.delete');
+});
+
+// Mahasiswa
+Route::group(['prefix' => 'mahasiswa'], function () {
+    Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+    Route::get('/list', [MahasiswaController::class, 'list'])->name('mahasiswa.list');
+    // show detail
 });
