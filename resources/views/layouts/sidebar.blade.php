@@ -97,6 +97,14 @@
                     </ul>
                 </li>
 
+                {{-- Data User --}}
+                <li class="sidebar-item {{ $activeMenu == 'user' ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-fill"></i>
+                        <span>Data User</span>
+                    </a>
+                </li>
+
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>

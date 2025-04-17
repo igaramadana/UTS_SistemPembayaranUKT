@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\JurusanController;
+use Illuminate\Foundation\Console\RouteListCommand;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,4 +70,16 @@ Route::group(['prefix' => 'prodi'], function () {
     // Delete
     Route::get('/{id}/delete', [ProdiController::class, 'confirm'])->name('prodi.confirm');
     Route::delete('/{id}/delete', [ProdiController::class, 'delete'])->name('prodi.delete');
+});
+
+// User
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
+    Route::get('/list', [UserController::class, 'list'])->name('user.list');
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
+    // show detail
+    Route::get('/detail/{id}', [UserController::class, 'show'])->name('user.show');
+    // Delete
+    Route::get('/{id}/delete', [UserController::class, 'confirm'])->name('user.confirm');
+    Route::delete('/{id}/delete', [UserController::class, 'delete'])->name('user.delete');
 });
