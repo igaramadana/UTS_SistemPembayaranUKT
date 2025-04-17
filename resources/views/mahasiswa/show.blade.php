@@ -13,7 +13,7 @@
                                     <h4 class="mb-0 fw-bold"><i class="bi bi-person-badge me-2"></i>{{ $page->title }}</h4>
                                 </div>
                                 <div>
-                                    <a href="{{ route('mahasiswa.index') }}" class="btn btn-light btn-sm">
+                                    <a href="{{ route('mahasiswa.index') }}" class="btn btn-primary btn-sm">
                                         <i class="bi bi-arrow-left me-1"></i> Kembali
                                     </a>
                                 </div>
