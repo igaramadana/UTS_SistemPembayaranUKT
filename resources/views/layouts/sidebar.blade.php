@@ -105,6 +105,14 @@
                     </a>
                 </li>
 
+                {{-- Data Mahasiswa --}}
+                <li class="sidebar-item {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
+                    <a href="{{ route('mahasiswa.index') }}" class='sidebar-link'>
+                        <i class="bi bi-people-fill"></i>
+                        <span>Data Mahasiswa</span>
+                    </a>
+                </li>
+
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>

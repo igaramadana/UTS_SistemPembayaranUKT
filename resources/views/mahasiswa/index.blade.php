@@ -4,309 +4,326 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-sm text-start">
-                        <h5 class="card-title">Data Mahasiswa</h5>
+                        <h5 class="card-title mb-0">{{ $page->title }}</h5>
                     </div>
                     <div class="col-sm text-end">
                         <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#border-less">Tambah Data</button>
+                            data-bs-target="#border-less">
+                            <i class="bi bi-plus-circle me-1"></i> Tambah Data
+                        </button>
                     </div>
                 </div>
             </div>
-            <div crowss="card-body">
+            <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table table-bordered table-striped table-hover align-middle" id="table_mahasiswa"
+                        width="100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th class="text-center">No</th>
+                                <th>Foto Profile</th>
+                                <th>NIM</th>
+                                <th>Nama Lengkap</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>City</th>
-                                <th>Status</th>
+                                <th>Angkatan</th>
+                                <th>Alamat</th>
+                                <th>No. HP</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Prodi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Graiden</td>
-                                <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                <td>076 4820 8838</td>
-                                <td>Offenburg</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dale</td>
-                                <td>fringilla.euismod.enim@quam.ca</td>
-                                <td>0500 527693</td>
-                                <td>New Quay</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Nathaniel</td>
-                                <td>mi.Duis@diam.edu</td>
-                                <td>(012165) 76278</td>
-                                <td>Grumo Appula</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactive</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Darius</td>
-                                <td>velit@nec.com</td>
-                                <td>0309 690 7871</td>
-                                <td>Ways</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Oleg</td>
-                                <td>rhoncus.id@Aliquamauctorvelit.net</td>
-                                <td>0500 441046</td>
-                                <td>Rossignol</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kermit</td>
-                                <td>diam.Sed.diam@anteVivamusnon.org</td>
-                                <td>(01653) 27844</td>
-                                <td>Patna</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jermaine</td>
-                                <td>sodales@nuncsit.org</td>
-                                <td>0800 528324</td>
-                                <td>Mold</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ferdinand</td>
-                                <td>gravida.molestie@tinciduntadipiscing.org</td>
-                                <td>(016977) 4107</td>
-                                <td>Marlborough</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactive</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kuame</td>
-                                <td>Quisque.purus@mauris.org</td>
-                                <td>(0151) 561 8896</td>
-                                <td>Tresigallo</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Deacon</td>
-                                <td>Duis.a.mi@sociisnatoquepenatibus.com</td>
-                                <td>07740 599321</td>
-                                <td>Karapınar</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Channing</td>
-                                <td>tempor.bibendum.Donec@ornarelectusante.ca</td>
-                                <td>0845 46 49</td>
-                                <td>Warrnambool</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Aladdin</td>
-                                <td>sem.ut@pellentesqueafacilisis.ca</td>
-                                <td>0800 1111</td>
-                                <td>Bothey</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cruz</td>
-                                <td>non@quisturpisvitae.ca</td>
-                                <td>07624 944915</td>
-                                <td>Shikarpur</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Keegan</td>
-                                <td>molestie.dapibus@condimentumDonecat.edu</td>
-                                <td>0800 200103</td>
-                                <td>Assen</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ray</td>
-                                <td>placerat.eget@sagittislobortis.edu</td>
-                                <td>(0112) 896 6829</td>
-                                <td>Hofors</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Maxwell</td>
-                                <td>diam@dapibus.org</td>
-                                <td>0334 836 4028</td>
-                                <td>Thane</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carter</td>
-                                <td>urna.justo.faucibus@orci.com</td>
-                                <td>07079 826350</td>
-                                <td>Biez</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Stone</td>
-                                <td>velit.Aliquam.nisl@sitametrisus.com</td>
-                                <td>0800 1111</td>
-                                <td>Olivar</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Berk</td>
-                                <td>fringilla.porttitor.vulputate@taciti.edu</td>
-                                <td>(0101) 043 2822</td>
-                                <td>Sanquhar</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Philip</td>
-                                <td>turpis@euenimEtiam.org</td>
-                                <td>0500 571108</td>
-                                <td>Okara</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kibo</td>
-                                <td>feugiat@urnajustofaucibus.co.uk</td>
-                                <td>07624 682306</td>
-                                <td>La Cisterna</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Bruno</td>
-                                <td>elit.Etiam.laoreet@luctuslobortisClass.edu</td>
-                                <td>07624 869434</td>
-                                <td>Rocca d"Arce</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Leonard</td>
-                                <td>blandit.enim.consequat@mollislectuspede.net</td>
-                                <td>0800 1111</td>
-                                <td>Lobbes</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Hamilton</td>
-                                <td>mauris@diam.org</td>
-                                <td>0800 256 8788</td>
-                                <td>Sanzeno</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Harding</td>
-                                <td>Lorem.ipsum.dolor@etnetuset.com</td>
-                                <td>0800 1111</td>
-                                <td>Obaix</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Emmanuel</td>
-                                <td>eget.lacus.Mauris@feugiatSednec.org</td>
-                                <td>(016977) 8208</td>
-                                <td>Saint-Remy-Geest</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
     </section>
 
-    <!--BorderLess Modal Modal -->
+    <!-- Modal Tambah -->
     <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Border-Less</h5>
+                    <h5 class="modal-title text-white">Tambah Data Mahasiswa</h5>
                     <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
+                        <i data-feather="x" class="text-white"></i>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>
-                        Bonbon caramels muffin. Chocolate bar oat cake cookie pastry dragée
-                        pastry. Carrot cake
-                        chocolate tootsie roll chocolate bar candy canes biscuit.
-                        Gummies bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet
-                        roll. Toffee sugar
-                        plum sugar plum jelly-o jujubes bonbon dessert carrot cake. Cookie
-                        dessert tart muffin topping
-                        donut icing fruitcake. Sweet roll cotton candy dragée danish Candy canes
-                        chocolate bar cookie.
-                        Gingerbread apple pie oat cake. Carrot cake fruitcake bear claw. Pastry
-                        gummi bears
-                        marshmallow jelly-o.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                    <button type="button" class="btn btn-primary ms-1" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Accept</span>
-                    </button>
-                </div>
+                <form id="formTambahMahasiswa" action="{{ route('mahasiswa.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-body">
+                            <div class="row">
+                                <!-- User Account Section -->
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="form-group mb-3">
+                                                <label for="email">Email</label>
+                                                <input type="email" id="email" class="form-control" name="email"
+                                                    placeholder="Masukkan Email" required>
+                                                <div class="invalid-feedback" id="email_error"></div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="password">Password</label>
+                                                <input type="password" id="password" class="form-control" name="password"
+                                                    placeholder="Masukkan Password" required minlength="8">
+                                                <div class="invalid-feedback" id="password_error"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password_confirmation">Konfirmasi Password</label>
+                                                <input type="password" id="password_confirmation" class="form-control"
+                                                    name="password_confirmation" placeholder="Konfirmasi Password" required>
+                                                <div class="invalid-feedback" id="password_confirmation_error"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Student Information Section -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="form-group mb-3">
+                                                <label for="nim">NIM</label>
+                                                <input type="text" id="nim" class="form-control" name="nim"
+                                                    placeholder="Masukkan NIM" required>
+                                                <div class="invalid-feedback" id="nim_error"></div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="mahasiswa_nama">Nama Lengkap</label>
+                                                <input type="text" id="mahasiswa_nama" class="form-control"
+                                                    name="mahasiswa_nama" placeholder="Masukkan Nama Lengkap" required>
+                                                <div class="invalid-feedback" id="mahasiswa_nama_error"></div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="angkatan">Angkatan</label>
+                                                <input type="number" id="angkatan" class="form-control" name="angkatan"
+                                                    placeholder="Masukkan Tahun Angkatan" required>
+                                                <div class="invalid-feedback" id="angkatan_error"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Information -->
+                                <div class="col-md-6">
+                                    <div class="card mt-1">
+                                        <div class="card-body">
+                                            <div class="form-group mb-3">
+                                                <label for="prodi_id">Program Studi</label>
+                                                <select name="prodi_id" id="prodi_id" class="form-control" required>
+                                                    <option value="">-- Pilih Prodi --</option>
+                                                    @foreach ($prodi as $item)
+                                                        <option value="{{ $item->prodi_id }}">{{ $item->prodi_nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="invalid-feedback" id="prodi_id_error"></div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-control"
+                                                    required>
+                                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                                    <option value="Laki-laki">Laki-laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                                <div class="invalid-feedback" id="jenis_kelamin_error"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="card mt-1">
+                                        <div class="card-body">
+                                            <div class="form-group mb-3">
+                                                <label for="mahasiswa_alamat">Alamat</label>
+                                                <textarea id="mahasiswa_alamat" class="form-control" name="mahasiswa_alamat" placeholder="Masukkan Alamat" required></textarea>
+                                                <div class="invalid-feedback" id="mahasiswa_alamat_error"></div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="no_telepon">No. HP</label>
+                                                <input type="text" id="no_telepon" class="form-control"
+                                                    name="no_telepon" placeholder="Masukkan Nomor Telepon" required>
+                                                <div class="invalid-feedback" id="no_telepon_error"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x"></i> Tutup
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check"></i> Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    {{-- Confirmation Modal --}}
+    <div id="myModal" class="modal fade text-left modal-borderless" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel1" aria-hidden="true"></div>
 @endsection
+
+@push('css')
+@endpush
+
+@push('scripts')
+    <script>
+        function modalAction(url = '') {
+            $('#myModal').load(url, function() {
+                $('#myModal').modal('show');
+            });
+        }
+        $(document).ready(function() {
+            // Fungsi untuk menampilkan notifikasi Toastify
+            function showToast(message, type = 'success') {
+                const toastConfig = {
+                    text: message,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                };
+
+                // Sesuaikan warna berdasarkan jenis notifikasi
+                switch (type) {
+                    case 'success':
+                        toastConfig.backgroundColor = "#4fbe87";
+                        break;
+                    case 'error':
+                        toastConfig.backgroundColor = "#ff3333";
+                        break;
+                    case 'warning':
+                        toastConfig.backgroundColor = "#ff9966";
+                        break;
+                    default:
+                        toastConfig.backgroundColor = "#4fbe87";
+                }
+
+                Toastify(toastConfig).showToast();
+            }
+
+            $('#table_mahasiswa').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('mahasiswa.list') }}",
+                    type: 'GET',
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center'
+                    },
+
+                    {
+                        data: 'foto_profile',
+                        name: 'foto_profile',
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center'
+                    },
+                    {
+                        data: 'nim',
+                        name: 'nim'
+                    },
+                    {
+                        data: 'mahasiswa_nama',
+                        name: 'mahasiswa_nama'
+                    },
+                    {
+                        data: 'user.email',
+                        name: 'user.email',
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin'
+                    },
+                    {
+                        data: 'mahasiswa_alamat',
+                        name: 'mahasiswa_alamat'
+                    },
+                    {
+                        data: 'no_telepon',
+                        name: 'no_telepon'
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin'
+                    },
+                    {
+                        data: 'prodi.prodi_nama',
+                        name: 'prodi.prodi_nama'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+            });
+
+            // Handle form submission
+            $('#formTambahMahasiswa').submit(function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+
+                $('.is-invalid').removeClass('is-invalid');
+                $('.invalid-feedback').text('');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function(response) {
+                        $('#border-less').modal('hide');
+                        $('#table_mahasiswa').DataTable().ajax.reload();
+                        form[0].reset();
+
+                        showToast('Data Mahasiswa berhasil ditambahkan', 'success');
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+                            $.each(errors, function(key, value) {
+                                $('#' + key).addClass('is-invalid');
+                                $('#' + key + '_error').text(value[0]);
+                            });
+
+                            showToast('Terdapat kesalahan pada input data', 'error');
+                        } else {
+                            showToast(xhr.responseJSON.message || 'Terjadi kesalahan saat menyimpan data', 'error');
+                        }
+                    }
+                });
+            });
+
+            // Reset form ketika modal ditutup
+            $('#myModal').on('hidden.bs.modal', function() {
+                $('#formTambahRole')[0].reset();
+                $('.is-invalid').removeClass('is-invalid');
+                $('.invalid-feedback').text('');
+            });
+        });
+    </script>
+@endpush

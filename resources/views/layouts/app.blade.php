@@ -21,6 +21,7 @@
     <link rel="stylesheet" crossorigin href="{{ url('template/assets/compiled/css/table-datatable-jquery.css') }}">
     {{-- Toastify --}}
     <link rel="stylesheet" href="{{ url('template/assets/extensions/toastify-js/src/toastify.css') }}">
+
 </head>
 
 <body>
