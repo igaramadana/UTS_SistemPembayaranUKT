@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\ProdiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::get('/mahasiswa', function () {
     return view('mahasiswa.index');
 });
 
+// Role
 Route::group(['prefix' => 'role'], function () {
     Route::get('/', [RoleController::class, 'index'])->name('role.index');
     Route::get('/list', [RoleController::class, 'list'])->name('role.list');
@@ -38,6 +40,7 @@ Route::group(['prefix' => 'role'], function () {
     Route::delete('/{id}/delete', [RoleController::class, 'delete'])->name('role.delete');
 });
 
+// Jurusan
 Route::group(['prefix' => 'jurusan'], function () {
     Route::get('/', [JurusanController::class, 'index'])->name('jurusan.index');
     Route::get('/list', [JurusanController::class, 'list'])->name('jurusan.list');
@@ -50,4 +53,19 @@ Route::group(['prefix' => 'jurusan'], function () {
     // Delete
     Route::get('/{id}/delete', [JurusanController::class, 'confirm'])->name('jurusan.confirm');
     Route::delete('/{id}/delete', [JurusanController::class, 'delete'])->name('jurusan.delete');
+});
+
+// Program studi
+Route::group(['prefix' => 'prodi'], function () {
+    Route::get('/', [ProdiController::class, 'index'])->name('prodi.index');
+    Route::get('/list', [ProdiController::class, 'list'])->name('prodi.list');
+    Route::post('/store', [ProdiController::class, 'store'])->name('prodi.store');
+    // Show Detail
+    Route::get('/detail/{id}', [ProdiController::class, 'show'])->name('prodi.show');
+    // Edit Data
+    Route::get('/{id}/edit', [ProdiController::class, 'edit'])->name('prodi.edit');
+    Route::put('/{id}/update', [ProdiController::class, 'update'])->name('prodi.update');
+    // Delete
+    Route::get('/{id}/delete', [ProdiController::class, 'confirm'])->name('prodi.confirm');
+    Route::delete('/{id}/delete', [ProdiController::class, 'delete'])->name('prodi.delete');
 });

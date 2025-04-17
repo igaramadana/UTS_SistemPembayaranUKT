@@ -81,6 +81,22 @@
                     </ul>
                 </li>
 
+                {{-- Data Prodi --}}
+                <li class="sidebar-item has-sub {{ $activeMenu == 'prodi' ? 'active' : '' }}">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-bookmarks-fill"></i>
+                        <span>Data Program Studi</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="{{ route('prodi.index') }}"
+                                class="submenu-link {{ $activeMenu == 'prodi' ? 'active' : '' }}">
+                                Daftar Program Studi
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
