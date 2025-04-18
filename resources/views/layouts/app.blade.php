@@ -51,6 +51,28 @@
     {{-- Toastify --}}
     <script src="{{url('template/assets/extensions/toastify-js/src/toastify.js')}}"></script>
     <script src="{{url('template/assets/static/js/pages/toastify.js')}}"></script>
+    {{-- Sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function showNotification(message, type) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: type === 'success' ? '#4CAF50' : '#F44336',
+            }).showToast();
+        }
+
+        // Check for flash messages when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session()->has('notification'))
+                showNotification("{{ session('notification')['message'] }}", "{{ session('notification')['type'] }}");
+            @endif
+        });
+    </script>
 
     @stack('scripts')
 </body>

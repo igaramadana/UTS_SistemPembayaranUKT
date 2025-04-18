@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class UserModel extends Model
+class UserModel extends Authenticatable
 {
-    use HasFactory;
-
+    use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'users';
     protected $primaryKey = 'user_id';
     protected $fillable = [
@@ -26,5 +27,10 @@ class UserModel extends Model
     public function role()
     {
         return $this->belongsTo(RoleModel::class, 'role_id', 'role_id');
+    }
+
+    public function hasRole($roleCode)
+    {
+        return $this->role->role_code === $roleCode;
     }
 }

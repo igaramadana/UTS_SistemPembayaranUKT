@@ -22,7 +22,7 @@ class JurusanController extends Controller
 
         $activeMenu = 'jurusan';
 
-        return view('jurusan.index', compact('breadcrumb', 'page', 'activeMenu'));
+        return view('Admin.jurusan.index', compact('breadcrumb', 'page', 'activeMenu'));
     }
 
     public function list(Request $request)
@@ -74,7 +74,7 @@ class JurusanController extends Controller
 
         $activeMenu = 'jurusan';
         if ($jurusan) {
-            return view('jurusan.show', compact('jurusan', 'breadcrumb', 'page', 'activeMenu'));
+            return view('Admin.jurusan.show', compact('jurusan', 'breadcrumb', 'page', 'activeMenu'));
         } else {
             showNotification('error', 'Data jurusan tidak ditemukan');
             return redirect()->route('jurusan.index');
@@ -85,7 +85,7 @@ class JurusanController extends Controller
     {
         $jurusan = JurusanModel::find($id);
 
-        return view('jurusan.edit', compact('jurusan'));
+        return view('Admin.jurusan.edit', compact('jurusan'));
     }
 
     public function update(Request $request, string $id)
@@ -121,7 +121,7 @@ class JurusanController extends Controller
     {
         $jurusan = JurusanModel::find($id);
         if ($jurusan) {
-            return view('jurusan.confirm', compact('jurusan'));
+            return view('Admin.jurusan.confirm', compact('jurusan'));
         } else {
             showNotification('error', 'Data jurusan tidak ditemukan');
             return redirect()->route('jurusan.index');

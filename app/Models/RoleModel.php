@@ -15,12 +15,10 @@ class RoleModel extends Model
     protected $fillable = [
         'role_code',
         'role_nama',
-        'created_at',
-        'updated_at'
     ];
 
     public function user()
     {
-        return $this->hasMany(UserModel::class, 'role_id', 'role_id');
+        return $this->hasMany(UserModel::class, 'role_id');
     }
 }

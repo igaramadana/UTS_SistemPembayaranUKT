@@ -35,7 +35,7 @@ class MahasiswaController extends Controller
 
         $user = UserModel::select('user_id', 'role_id', 'email')->with('role')->get();
         $prodi = ProdiModel::select('prodi_id', 'prodi_nama')->get();
-        return view('mahasiswa.index', compact('breadcrumb', 'page', 'activeMenu', 'user', 'prodi'));
+        return view('Admin.mahasiswa.index', compact('breadcrumb', 'page', 'activeMenu', 'user', 'prodi'));
     }
 
     public function list()
@@ -135,6 +135,6 @@ class MahasiswaController extends Controller
         ];
         $activeMenu = 'mahasiswa';
 
-        return view('mahasiswa.show', compact('breadcrumb', 'page', 'activeMenu', 'mahasiswa', 'prodi', 'user', 'avatar'));
+        return view('Admin.mahasiswa.show', compact('breadcrumb', 'page', 'activeMenu', 'mahasiswa', 'prodi', 'user', 'avatar'));
     }
 }

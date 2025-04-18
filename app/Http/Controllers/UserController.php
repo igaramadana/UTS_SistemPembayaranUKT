@@ -35,7 +35,7 @@ class UserController extends Controller
         $activeMenu = 'user';
 
         $role = RoleModel::select('role_id', 'role_code', 'role_nama')->get();
-        return view('user.index', compact('breadcrumb', 'page', 'activeMenu', 'role'));
+        return view('Admin.user.index', compact('breadcrumb', 'page', 'activeMenu', 'role'));
     }
 
     public function list()
@@ -103,7 +103,7 @@ class UserController extends Controller
         ];
         $activeMenu = 'user';
 
-        return view('user.show', compact('breadcrumb', 'page', 'activeMenu', 'user', 'detailData', 'role', 'avatar'));
+        return view('Admin.user.show', compact('breadcrumb', 'page', 'activeMenu', 'user', 'detailData', 'role', 'avatar'));
     }
 
     public function confirm(string $id)
@@ -111,7 +111,7 @@ class UserController extends Controller
         $users = UserModel::find($id);
         $avatar = $this->avatar->create($users->email)->toBase64();
         if ($users) {
-            return view('user.confirm', compact('users', 'avatar'));
+            return view('Admin.user.confirm', compact('users', 'avatar'));
         } else {
             showNotification('error', 'Data user tidak ditemukan');
             return redirect()->route('user.index');

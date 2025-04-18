@@ -23,7 +23,7 @@ class ProdiController extends Controller
         $activeMenu = 'prodi';
 
         $jurusan = JurusanModel::select('jurusan_id', 'jurusan_kode', 'jurusan_nama')->get();
-        return view('prodi.index', compact('breadcrumb', 'page', 'activeMenu', 'jurusan'));
+        return view('Admin.prodi.index', compact('breadcrumb', 'page', 'activeMenu', 'jurusan'));
     }
 
     public function list(Request $request)
@@ -79,7 +79,7 @@ class ProdiController extends Controller
         ];
         $activeMenu = 'prodi';
 
-        return view('prodi.show', compact('breadcrumb', 'page', 'activeMenu', 'prodi', 'jurusan'));
+        return view('Admin.prodi.show', compact('breadcrumb', 'page', 'activeMenu', 'prodi', 'jurusan'));
     }
 
     public function edit(string $id)
@@ -87,7 +87,7 @@ class ProdiController extends Controller
         $prodi = ProdiModel::find($id);
         $jurusan = JurusanModel::select('jurusan_id', 'jurusan_kode', 'jurusan_nama')->get();
 
-        return view('prodi.edit', compact('prodi', 'jurusan'));
+        return view('Admin.prodi.edit', compact('prodi', 'jurusan'));
     }
 
     public function update(Request $request, string $id)
@@ -124,7 +124,7 @@ class ProdiController extends Controller
     {
         $prodi = ProdiModel::find($id);
         if ($prodi) {
-            return view('prodi.confirm', compact('prodi'));
+            return view('Admin.prodi.confirm', compact('prodi'));
         } else {
             showNotification('error', 'Data prodi tidak ditemukan');
             return redirect()->route('prodi.index');

@@ -28,7 +28,7 @@ class AdminController extends Controller
             'title' => 'Daftar Admin',
         ];
         $activeMenu = 'admin';
-        return view('admin.index', compact('breadcrumb', 'page', 'activeMenu'));
+        return view('Admin.admin.index', compact('breadcrumb', 'page', 'activeMenu'));
     }
 
     public function list()
@@ -106,6 +106,6 @@ class AdminController extends Controller
             'title' => 'Detail Admin',
         ];
         $activeMenu = 'admin';
-        return view('admin.show', compact('breadcrumb', 'page', 'activeMenu', 'admin', 'user', 'avatar'));
+        return view('Admin.admin.show', compact('breadcrumb', 'page', 'activeMenu', 'admin', 'user', 'avatar'));
     }
 }

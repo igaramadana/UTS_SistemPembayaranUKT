@@ -22,7 +22,7 @@ class RoleController extends Controller
 
         $activeMenu = 'role';
 
-        return view('role.index', compact('breadcrumb', 'page', 'activeMenu'));
+        return view('Admin.role.index', compact('breadcrumb', 'page', 'activeMenu'));
     }
 
     public function list(Request $request)
@@ -77,7 +77,7 @@ class RoleController extends Controller
         $activeMenu = 'role';
 
         if ($role) {
-            return view('role.show', compact('breadcrumb', 'page', 'activeMenu', 'role'));
+            return view('Admin.role.show', compact('breadcrumb', 'page', 'activeMenu', 'role'));
         } else {
             showNotification('error', 'Data role tidak ditemukan');
             return redirect()->route('role.index');
@@ -88,7 +88,7 @@ class RoleController extends Controller
     {
         $role = RoleModel::find($id);
 
-        return view('role.edit', compact('role'));
+        return view('Admin.role.edit', compact('role'));
     }
 
     public function update(Request $request, string $id)
