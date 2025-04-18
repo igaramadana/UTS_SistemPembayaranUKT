@@ -103,4 +103,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/list', [AdminController::class, 'list'])->name('admin.list');
     Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
+    // Show Detail
+    Route::get('/detail/{id}', [AdminController::class, 'show'])->name('admin.show');
 });

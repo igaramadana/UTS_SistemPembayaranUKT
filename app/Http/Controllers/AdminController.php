@@ -43,10 +43,10 @@ class AdminController extends Controller
                 return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary">';
             })
             ->addColumn('action', function ($admin) {
-                // $btn = '<a href="' . route('admin.show', $admin->admin_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
+                $btn = '<a href="' . route('admin.show', $admin->admin_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
                 // $btn .= '<button onclick="modalAction(\'' . route('admin.edit', $admin->admin_id) . '\')" class="btn btn-warning btn-sm btn-edit">Edit</button> ';
                 // $btn .= '<button onclick="modalAction(\'' . url('/admin/' . $admin->admin_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
-                // return $btn;
+                return $btn;
             })
             ->rawColumns(['foto_profile', 'action'])
             ->make(true);
@@ -89,5 +89,23 @@ class AdminController extends Controller
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Data admin gagal ditambahkan']);
         }
+    }
+
+    public function show(string $id)
+    {
+        $admin = AdminModel::find($id);
+        $user = UserModel::find($admin->user_id);
+
+        $avatar = $this->avatar->create($admin->admin_nama)->toBase64();
+
+        $breadcrumb = (object) [
+            'title' => 'Admin',
+            'list' => ['Data Master', 'Admin', 'Detail Admin'],
+        ];
+        $page = (object) [
+            'title' => 'Detail Admin',
+        ];
+        $activeMenu = 'admin';
+        return view('admin.show', compact('breadcrumb', 'page', 'activeMenu', 'admin', 'user', 'avatar'));
     }
 }
