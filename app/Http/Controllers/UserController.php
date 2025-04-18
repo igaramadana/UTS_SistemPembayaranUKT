@@ -55,7 +55,7 @@ class UserController extends Controller
                     $nama = $user->email;
                 }
 
-                $avatarImage = $this->avatar->create($nama)->toBase64();
+                $avatarImage = $this->avatar->create($nama)->setTheme('colorful')->toBase64();
                 return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary">';
             })
             ->addColumn('action', function ($user) {

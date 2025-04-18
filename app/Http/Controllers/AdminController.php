@@ -39,7 +39,7 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('foto_profile', function ($admin) {
                 $adminImage = AdminModel::where('user_id', $admin->user_id)->first();
-                $avatarImage = $adminImage ? $this->avatar->create($adminImage->admin_nama)->toBase64() : '';
+                $avatarImage = $adminImage ? $this->avatar->create($adminImage->admin_nama)->setTheme('colorful')->toBase64() : '';
                 return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary">';
             })
             ->addColumn('action', function ($admin) {
