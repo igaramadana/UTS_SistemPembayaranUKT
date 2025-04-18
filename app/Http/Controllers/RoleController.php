@@ -22,7 +22,6 @@ class RoleController extends Controller
 
         $activeMenu = 'role';
 
-        // Hanya return view biasa tanpa data roles
         return view('role.index', compact('breadcrumb', 'page', 'activeMenu'));
     }
 
