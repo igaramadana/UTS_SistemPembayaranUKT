@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
@@ -95,4 +96,11 @@ Route::group(['prefix' => 'mahasiswa'], function () {
     Route::post('/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
     // show detail
     Route::get('/detail/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+});
+
+// Admin
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/list', [AdminController::class, 'list'])->name('admin.list');
+    Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
 });

@@ -113,6 +113,14 @@
                     </a>
                 </li>
 
+                {{-- Data Admin --}}
+                <li class="sidebar-item {{ $activeMenu == 'admin' ? 'active' : '' }}">
+                    <a href="{{ route('admin.index') }}" class='sidebar-link'>
+                        <i class="bi bi-people-fill"></i>
+                        <span>Data Admin</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-cash-stack"></i>
