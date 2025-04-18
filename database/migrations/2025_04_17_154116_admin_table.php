@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id('admin_id');
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('admin_nama', 100);
+            $table->timestamps();
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
