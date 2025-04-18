@@ -8,6 +8,7 @@ use App\Models\AdminModel;
 use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
 use App\Models\MahasiswaModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -120,14 +121,28 @@ class UserController extends Controller
     public function delete(Request $request)
     {
         if ($request->ajax() || $request->wantsJson()) {
-            $users = UserModel::find($request->id);
-            if ($users) {
-                $users->delete();
-                showNotification('success', 'Data user berhasil dihapus');
+            try {
+                DB::beginTransaction();
+                $user = UserModel::find($request->id);
+
+                if (!$user) {
+                    showNotification('error', 'Data user tidak ditemukan');
+                    return response()->json(['success' => false], 404);
+                }
+
+                if ($user->role_id == 1) {
+                    AdminModel::where('user_id', $user->user_id)->delete();
+                } elseif ($user->role_id == 2) {
+                    MahasiswaModel::where('user_id', $user->user_id)->delete();
+                }
+                $user->delete();
+                DB::commit();
+                showNotification('success', 'Berhasil menghapus data user');
                 return response()->json(['success' => true]);
-            } else {
-                showNotification('error', 'Data user tidak ditemukan');
-                return response()->json(['success' => false], 404);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                showNotification('error', 'Gagal menghapus data user: ' . $e->getMessage());
+                return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
             }
         }
         showNotification('error', 'Gagal menghapus data user');
