@@ -21,21 +21,19 @@ class CheckRole
 
         $user = Auth::user();
 
-        if ($user->role->role_code) {
-            return $next($request);
+        if (!$user->role || $user->role->role_code !== $role) {
+            switch ($user->role->role_code ?? null) {
+                case 'ADM':
+                    return redirect()->route('admin.index');
+                case 'MHS':
+                    return redirect()->route('mahasiswa.index');
+                default:
+                    return redirect()->route('login')->withErrors([
+                        'role' => 'You do not have permission to access this page.',
+                    ])->onlyInput('email');
+            }
         }
 
-        switch ($user->role->role_code) {
-            case 'ADM':
-                return redirect()->route('admin.index');
-
-            case 'MHS':
-                return redirect()->route('mahasiswa.index');
-
-            default:
-                return redirect()->route('login')->withErrors([
-                    'role' => 'You do not have permission to access this page.',
-                ])->onlyInput('email');
-        }
+        return $next($request);
     }
 }

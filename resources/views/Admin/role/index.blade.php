@@ -130,6 +130,13 @@
                 Toastify(toastConfig).showToast();
             }
 
+            @if(Session::has('toast_message'))
+                showToast(
+                    "{{ Session::get('toast_message') }}",
+                    "{{ Session::get('toast_type', 'success') }}"
+                );
+            @endif
+
             $('#table_role').DataTable({
                 processing: true,
                 serverSide: true,

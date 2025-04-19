@@ -54,7 +54,7 @@ Route::middleware(['auth', 'role:ADM'])->prefix('admin')->group(function () {
         Route::get('/{id}/edit', [RoleController::class, 'edit'])->name('role.edit');
         Route::put('/{id}/update', [RoleController::class, 'update'])->name('role.update');
         // Delete
-        Route::get('/{id}/delete', [RoleController::class, 'confirm'])->name('role.confirm');
+        Route::get('/{id}/confirm-delete', [RoleController::class, 'confirm'])->name('role.confirm');
         Route::delete('/{id}/delete', [RoleController::class, 'delete'])->name('role.delete');
     });
 

@@ -66,13 +66,6 @@
                 backgroundColor: type === 'success' ? '#4CAF50' : '#F44336',
             }).showToast();
         }
-
-        // Check for flash messages when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            @if(session()->has('notification'))
-                showNotification("{{ session('notification')['message'] }}", "{{ session('notification')['type'] }}");
-            @endif
-        });
     </script>
 
     @stack('scripts')
