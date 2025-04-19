@@ -86,7 +86,6 @@
             });
         });
 
-        // Reset modal when closed
         $('#myModal').on('hidden.bs.modal', function() {
             $(this).empty();
         });
