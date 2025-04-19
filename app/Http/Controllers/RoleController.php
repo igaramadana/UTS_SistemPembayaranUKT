@@ -34,7 +34,7 @@ class RoleController extends Controller
             ->addColumn('action', function ($role) {
                 $btn = '<a href="' . route('role.show', $role->role_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
                 $btn .= '<button onclick="modalAction(\'' . route('role.edit', $role->role_id) . '\')" class="btn btn-warning btn-sm btn-edit">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/role/' . $role->role_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
+                $btn .= '<button onclick="modalAction(\'' . route('role.confirm', $role->role_id) . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -126,28 +126,38 @@ class RoleController extends Controller
         $role = RoleModel::find($id);
 
         if ($role) {
-            return view('role.confirm', compact('role'));
+            return view('Admin.role.confirm', compact('role'));
         } else {
             showNotification('error', 'Data role tidak ditemukan');
             return redirect()->route('role.index');
         }
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, string $id)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            $role = RoleModel::find($request->id);
+        $role = RoleModel::find($id);
 
-            if ($role) {
-                $role->delete();
-                showNotification('success', 'Data role berhasil dihapus');
-                return response()->json(['success' => true]);
-            } else {
-                showNotification('error', 'Data role tidak ditemukan');
-                return response()->json(['success' => false], 404);
-            }
+        if (!$role) {
+            showNotification('error', 'Data role tidak ditemukan');
+            return response()->json([
+                'success' => false,
+                'message' => 'Data role tidak ditemukan'
+            ], 404);
         }
-        showNotification('error', 'Gagal menghapus data role');
-        return redirect()->route('role.index');
+
+        try {
+            $role->delete();
+            showNotification('success', 'Data role berhasil dihapus');
+            return response()->json([
+                'success' => true,
+                'message' => 'Data role berhasil dihapus'
+            ]);
+        } catch (\Exception $e) {
+            showNotification('error', 'Gagal menghapus data role');
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus data role'
+            ], 500);
+        }
     }
 }
