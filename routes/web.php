@@ -35,12 +35,9 @@ Route::get('/mahasiswa', function () {
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
 
 Route::middleware(['auth', 'role:ADM'])->prefix('admin')->group(function () {
     // Role
