@@ -59,6 +59,32 @@
 
     <script>
         $(document).on('click', '#confirmDelete', function() {
+            function showToast(message, type = 'success') {
+                const toastConfig = {
+                    text: message,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                };
+
+                switch (type) {
+                    case 'success':
+                        toastConfig.backgroundColor = "#4fbe87";
+                        break;
+                    case 'error':
+                        toastConfig.backgroundColor = "#ff3333";
+                        break;
+                    case 'warning':
+                        toastConfig.backgroundColor = "#ff9966";
+                        break;
+                    default:
+                        toastConfig.backgroundColor = "#4fbe87";
+                }
+
+                Toastify(toastConfig).showToast();
+            }
             const roleId = $(this).data('id');
             const deleteUrl = "{{ route('role.delete', ':id') }}".replace(':id', roleId);
 
