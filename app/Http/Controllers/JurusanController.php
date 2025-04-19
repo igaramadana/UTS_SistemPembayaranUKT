@@ -34,7 +34,7 @@ class JurusanController extends Controller
             ->addColumn('action', function ($jurusan) {
                 $btn = '<a href="' . route('jurusan.show', $jurusan->jurusan_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
                 $btn .= '<button onclick="modalAction(\'' . route('jurusan.edit', $jurusan->jurusan_id) . '\')" class="btn btn-warning btn-sm btn-edit">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/jurusan/' . $jurusan->jurusan_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
+                $btn .= '<button onclick="modalAction(\'' . route('jurusan.confirm', $jurusan->jurusan_id) . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
                 return $btn;
             })->rawColumns(['action'])->make(true);
     }
@@ -128,20 +128,31 @@ class JurusanController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, string $id)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            $jurusan = JurusanModel::find($request->id);
-            if ($jurusan) {
-                $jurusan->delete();
-                showNotification('success', 'Data jurusan berhasil dihapus');
-                return response()->json(['success' => true]);
-            } else {
-                showNotification('error', 'Data jurusan tidak ditemukan');
-                return response()->json(['success' => false], 404);
-            }
+        $jurusan = JurusanModel::find($id);
+
+        if (!$jurusan) {
+            showNotification('error', 'Data jurusan tidak ditemukan');
+            return response()->json([
+                'success' => false,
+                'message' => 'Data jurusan tidak ditemukan'
+            ], 404);
         }
-        showNotification('error', 'Gagal menghapus data jurusan');
-        return redirect()->route('jurusan.index');
+
+        try {
+            $jurusan->delete();
+            showNotification('success', 'Data jurusan berhasil dihapus');
+            return response()->json([
+                'success' => true,
+                'message' => 'Data jurusan berhasil dihapus'
+            ]);
+        } catch (\Exception $e) {
+            showNotification('error', 'Gagal menghapus data jurusan');
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus data jurusan',
+            ], 500);
+        }
     }
 }
