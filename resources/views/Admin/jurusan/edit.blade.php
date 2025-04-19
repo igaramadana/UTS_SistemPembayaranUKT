@@ -20,7 +20,7 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/jurusan/' . $jurusan->jurusan_id . '/update') }}" method="POST" id="form-jurusan">
+    <form id="formEditJurusan" data-id="{{ $jurusan->jurusan_id }}">
         @csrf
         @method('PUT')
 
@@ -36,13 +36,15 @@
                     <div class="form-group">
                         <label for="edit_jurusan_kode">Jurusan Kode <span class="text-danger">*</span></label>
                         <input type="text" id="edit_jurusan_kode" class="form-control" name="jurusan_kode"
-                            value="{{ $jurusan->jurusan_kode }}" placeholder="Masukkan Jurusan Kode" required maxlength="5">
+                            value="{{ $jurusan->jurusan_kode }}" placeholder="Masukkan Jurusan Kode" required
+                            maxlength="5">
                         <div class="invalid-feedback" id="edit_jurusan_kode_error"></div>
                     </div>
                     <div class="form-group">
                         <label for="edit_jurusan_nama">Jurusan Nama <span class="text-danger">*</span></label>
                         <input type="text" id="edit_jurusan_nama" class="form-control" name="jurusan_nama"
-                            value="{{ $jurusan->jurusan_nama }}" placeholder="Masukkan Jurusan Nama" required maxlength="50">
+                            value="{{ $jurusan->jurusan_nama }}" placeholder="Masukkan Jurusan Nama" required
+                            maxlength="50">
                         <div class="invalid-feedback" id="edit_jurusan_nama_error"></div>
                     </div>
                 </div>
@@ -89,15 +91,18 @@
                 Toastify(toastConfig).showToast();
             }
 
-            $('#form-jurusan').submit(function(e) {
+            $('#formEditJurusan').submit(function(e) {
                 e.preventDefault();
+
+                const jurusanId = $(this).data('id');
+                const editUrl = "{{ route('jurusan.update', ':id') }}".replace(':id', jurusanId);
 
                 $('.is-invalid').removeClass('is-invalid');
                 $('.invalid-feedback').text('');
 
                 $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'PUT',
+                    url: editUrl,
+                    type: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response.success) {
