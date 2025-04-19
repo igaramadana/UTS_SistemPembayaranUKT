@@ -20,18 +20,17 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/prodi/' . $prodi->prodi_id . '/update') }}" method="POST" id="form-prodi">
-        @csrf
-        @method('PUT')
-
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Data Prodi</h5>
-                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Data Prodi</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <form id="form-prodi" data-id="{{ $prodi->prodi_id }}">
+                @csrf
+                @method('PUT')
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="jurusan_id">Jurusan</label>
@@ -66,8 +65,8 @@
                         <span class="d-none d-sm-block">Simpan</span>
                     </button>
                 </div>
-            </div>
         </div>
+    </div>
     </form>
 
     <script>
@@ -102,12 +101,15 @@
             $('#form-prodi').submit(function(e) {
                 e.preventDefault();
 
+                const prodiId = $(this).data('id');
+                const editUrl = "{{ route('prodi.update', ':id') }}".replace(':id', prodiId);
+
                 $('.is-invalid').removeClass('is-invalid');
                 $('.invalid-feedback').text('');
 
                 $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'PUT',
+                    url: editUrl,
+                    type: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response.success) {
