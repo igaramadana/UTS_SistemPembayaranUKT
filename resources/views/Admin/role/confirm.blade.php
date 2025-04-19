@@ -96,8 +96,8 @@
                 },
                 success: function(response) {
                     $('#myModal').modal('hide');
-                    $('#table_role').DataTable().ajax.reload();
                     showToast(response.message || 'Data role berhasil dihapus', 'success');
+                    $('#table_role').DataTable().ajax.reload();
                 },
                 error: function(xhr) {
                     $('#myModal').modal('hide');

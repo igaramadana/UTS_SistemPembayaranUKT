@@ -60,7 +60,7 @@ class UserController extends Controller
             })
             ->addColumn('action', function ($user) {
                 $btn = '<a href="' . route('user.show', $user->user_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/user/' . $user->user_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
+                $btn .= '<button onclick="modalAction(\'' . route('user.confirm', $user->user_id) . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
                 return $btn;
             })
             ->rawColumns(['foto_profile', 'action'])
@@ -118,34 +118,37 @@ class UserController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, string $id)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            try {
-                DB::beginTransaction();
-                $user = UserModel::find($request->id);
+        $user = UserModel::find($id);
 
-                if (!$user) {
-                    showNotification('error', 'Data user tidak ditemukan');
-                    return response()->json(['success' => false], 404);
-                }
-
-                if ($user->role_id == 1) {
-                    AdminModel::where('user_id', $user->user_id)->delete();
-                } elseif ($user->role_id == 2) {
-                    MahasiswaModel::where('user_id', $user->user_id)->delete();
-                }
-                $user->delete();
-                DB::commit();
-                showNotification('success', 'Berhasil menghapus data user');
-                return response()->json(['success' => true]);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                showNotification('error', 'Gagal menghapus data user: ' . $e->getMessage());
-                return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
-            }
+        if (!$user) {
+            showNotification('error', 'Data user tidak ditemukan');
+            return response()->json(['success' => false, 'message' => 'Data user tidak ditemukan'], 404);
         }
-        showNotification('error', 'Gagal menghapus data user');
-        return redirect()->route('user.index');
+
+        try {
+            DB::beginTransaction();
+            $user = UserModel::find($request->id);
+
+            if (!$user) {
+                showNotification('error', 'Data user tidak ditemukan');
+                return response()->json(['success' => false], 404);
+            }
+
+            if ($user->role_id == 1) {
+                AdminModel::where('user_id', $user->user_id)->delete();
+            } elseif ($user->role_id == 2) {
+                MahasiswaModel::where('user_id', $user->user_id)->delete();
+            }
+            $user->delete();
+            DB::commit();
+            showNotification('success', 'Berhasil menghapus data user');
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            showNotification('error', 'Gagal menghapus data user: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }
