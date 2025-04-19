@@ -14,14 +14,14 @@ class MahasiswaSeeder extends Seeder
     {
         $data = [
             [
-                'user_id' => 4,
+                'user_id' => 2,
                 'nim' => '2341760083',
                 'mahasiswa_nama' => 'Iga Ramadana Sahputra',
                 'angkatan' => '2023',
                 'mahasiswa_alamat' => 'Jl. Raya No. 123',
                 'no_telepon' => '081234567890',
                 'Jenis_kelamin' => 'Laki-laki',
-                'prodi_id' => 6,
+                'prodi_id' => 7,
             ]
         ];
 

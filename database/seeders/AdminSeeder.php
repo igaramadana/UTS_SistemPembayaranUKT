@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
             [
                 'user_id' => 1,
                 'admin_nama' => 'Administrator',
-            ]
+            ],
         ];
 
         DB::table('admin')->insert($data);

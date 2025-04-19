@@ -128,10 +128,10 @@ class JurusanController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, string $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
-            $jurusan = JurusanModel::find($request->id);
+            $jurusan = JurusanModel::find($id);
             if ($jurusan) {
                 $jurusan->delete();
                 showNotification('success', 'Data jurusan berhasil dihapus');

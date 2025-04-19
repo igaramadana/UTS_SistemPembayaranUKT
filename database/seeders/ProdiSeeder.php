@@ -15,12 +15,12 @@ class ProdiSeeder extends Seeder
     {
         $data = [
             [
-                'jurusan_id' => 3,
+                'jurusan_id' => 7,
                 'prodi_kode' => 'TI',
                 'prodi_nama' => 'DIV - Teknik Informatika',
             ],
             [
-                'jurusan_id' => 3,
+                'jurusan_id' => 7,
                 'prodi_kode' => 'SIB',
                 'prodi_nama' => 'DIV - Sistem Informasi Bisnis',
             ],

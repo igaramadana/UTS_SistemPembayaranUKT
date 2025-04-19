@@ -22,6 +22,10 @@ class JurusanSeeder extends Seeder
             [
                 'jurusan_kode' => 'JTM',
                 'jurusan_nama' => 'Jurusan Teknik Mesin',
+            ],
+            [
+                'jurusan_kode' => 'JTI',
+                'jurusan_nama' => 'Jurusan Teknologi Informasi',
             ]
 
         ];

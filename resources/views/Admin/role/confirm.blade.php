@@ -19,7 +19,7 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/role/' . $role->role_id . '/delete') }}" method="POST" id="form-delete">
+    <form action="{{ url('admin/role/' . $role->role_id . '/delete') }}" method="POST" id="form-delete">
         @csrf
         @method('DELETE')
 
@@ -62,6 +62,11 @@
     </form>
     <script>
         $(document).ready(function() {
+            $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
             function showToast(message, type = 'success') {
                 const toastConfig = {
                     text: message,

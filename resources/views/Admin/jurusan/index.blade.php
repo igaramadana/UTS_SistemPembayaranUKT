@@ -43,7 +43,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-white">Tambah Data Jurusan</h5>
+                    <h5 class="modal-title text-primary">Tambah Data Jurusan</h5>
                     <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x" class="text-white"></i>
                     </button>

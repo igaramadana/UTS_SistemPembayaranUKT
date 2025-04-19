@@ -19,10 +19,9 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/jurusan/' . $jurusan->jurusan_id . '/delete') }}" method="POST" id="form-delete">
+    <form action="{{ route('jurusan.delete', $jurusan->jurusan_id) }}" method="POST" id="form-delete">
         @csrf
         @method('DELETE')
-
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

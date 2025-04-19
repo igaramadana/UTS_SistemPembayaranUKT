@@ -126,7 +126,7 @@ class RoleController extends Controller
         $role = RoleModel::find($id);
 
         if ($role) {
-            return view('role.confirm', compact('role'));
+            return view('Admin.role.confirm', compact('role'));
         } else {
             showNotification('error', 'Data role tidak ditemukan');
             return redirect()->route('role.index');
