@@ -35,7 +35,7 @@ class ProdiController extends Controller
             ->addColumn('action', function ($prodi) {
                 $btn = '<a href="' . route('prodi.show', $prodi->prodi_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
                 $btn .= '<button onclick="modalAction(\'' . route('prodi.edit', $prodi->prodi_id) . '\')" class="btn btn-warning btn-sm btn-edit">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/prodi/' . $prodi->prodi_id . '/delete') . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
+                $btn .= '<button onclick="modalAction(\'' . route('prodi.confirm', $prodi->prodi_id) . '\')" class="btn btn-danger btn-sm btn-delete">Hapus</button>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -131,20 +131,31 @@ class ProdiController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, string $id)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            $prodi = ProdiModel::find($request->id);
-            if ($prodi) {
-                $prodi->delete();
-                showNotification('success', 'Data prodi berhasil dihapus');
-                return response()->json(['success' => true]);
-            } else {
-                showNotification('error', 'Data jurusan tidak ditemukan');
-                return response()->json(['success' => false], 404);
-            }
+        $prodi = ProdiModel::find($id);
+
+        if (!$prodi) {
+            showNotification('error', 'Data prodi tidak ditemukan');
+            return response()->json([
+                'success' => false,
+                'message' => 'Data prodi tidak ditemukan'
+            ], 404);
         }
-        showNotification('error', 'Gagal menghapus data prodi');
-        return redirect()->route('prodi.index');
+
+        try {
+            $prodi->delete();
+            showNotification('success', 'Data prodi berhasil dihapus');
+            return response()->json([
+                'success' => true,
+                'message' => 'Data prodi berhasil dihapus'
+            ]);
+        } catch (\Exception $e) {
+            showNotification('error', 'Gagal menghapus data prodi');
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus data prodi'
+            ], 500);
+        }
     }
 }

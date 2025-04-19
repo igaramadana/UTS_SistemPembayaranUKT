@@ -19,53 +19,48 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/prodi/' . $prodi->prodi_id . '/delete') }}" method="POST" id="form-delete">
-        @csrf
-        @method('DELETE')
-
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Hapus Data Program Studi</h5>
-                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hapus Data Program Studi</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning text-center">
+                    <h5><i class="bi bi-exclamation-triangle-fill"></i> Apakah anda ingin menghapus data dibawah
+                        ini?</h5>
                 </div>
-                <div class="modal-body">
-                    <div class="alert alert-warning text-center">
-                        <h5><i class="bi bi-exclamation-triangle-fill"></i> Apakah anda ingin menghapus data dibawah
-                            ini?</h5>
-                    </div>
-                    <table class="table table-sm table-bordered table-striped">
-                        <tr>
-                            <th>Jurusan:</th>
-                            <td>{{ $prodi->jurusan->jurusan_nama }}</td>
-                        </tr>
-                        <tr>
-                            <th>Prodi Kode:</th>
-                            <td>{{ $prodi->prodi_kode }}</td>
-                        </tr>
-                        <tr>
-                            <th>Prodi Nama:</th>
-                            <td>{{ $prodi->prodi_nama }}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Batal</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary ms-1">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Simpan</span>
-                    </button>
-                </div>
+                <table class="table table-sm table-bordered table-striped">
+                    <tr>
+                        <th>Jurusan:</th>
+                        <td>{{ $prodi->jurusan->jurusan_nama }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prodi Kode:</th>
+                        <td>{{ $prodi->prodi_kode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prodi Nama:</th>
+                        <td>{{ $prodi->prodi_nama }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Batal</span>
+                </button>
+                <button type="submit" id="confirmDelete" data-id="{{ $prodi->prodi_id }}"" class="btn btn-primary ms-1">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Simpan</span>
+                </button>
             </div>
         </div>
-    </form>
+    </div>
     <script>
-        $(document).ready(function() {
+        $(document).on('click', '#confirmDelete', function() {
             function showToast(message, type = 'success') {
                 const toastConfig = {
                     text: message,
@@ -92,38 +87,35 @@
 
                 Toastify(toastConfig).showToast();
             }
-            $('#form-delete').submit(function(e) {
-                e.preventDefault();
-                var form = $(this);
+            const prodiId = $(this).data('id');
+            const deleteUrl = "{{ route('prodi.delete', ':id') }}".replace(':id', prodiId);
 
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'DELETE',
-                    data: form.serialize(),
-                    success: function(response) {
-                        if (response.success) {
-                            $('#myModal').modal('hide');
-                            showToast('Data Prodi berhasil dihapus', 'success');
+            $.ajax({
+                url: deleteUrl,
+                type: 'DELETE',
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    $('#myModal').modal('hide');
+                    $('#table_prodi').DataTable().ajax.reload();
+                    showToast(response.message || 'Data prodi berhasil dihapus', 'success');
+                },
+                error: function(xhr) {
+                    $('#myModal').modal('hide');
+                    let errorMessage = 'Terjadi kesalahan saat menghapus data';
 
-                            // Reload datatable
-                            $('#table_prodi').DataTable().ajax.reload();
-                        }
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 422) {
-                            var errors = xhr.responseJSON.errors;
-                            $.each(errors, function(key, value) {
-                                $('#' + key).addClass('is-invalid');
-                                $('#' + key + '_error').text(value[0]);
-                            });
-
-                            showToast('Terdapat kesalahan pada hapus data', 'error');
-                        } else {
-                            showToast('Terjadi kesalahan saat menyimpan data', 'error');
-                        }
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
                     }
-                });
+
+                    showToast(errorMessage, 'error');
+                }
             });
+        });
+
+        $('#myModal').on('hidden.bs.modal', function() {
+            $(this).empty();
         });
     </script>
 @endempty
