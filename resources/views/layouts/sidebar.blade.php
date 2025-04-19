@@ -42,64 +42,73 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
+                <!-- Dashboard -->
                 <li class="sidebar-item {{ $activeMenu == 'dashboard' ? 'active' : '' }}">
-                    <a href="dashboard.html" class='sidebar-link'>
+                    <a href="{{ url('/') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-title">Data Master</li>
+                <!-- Data Master Section -->
+                <li class="sidebar-title">
+                    <span>Data Master</span>
+                </li>
 
-                {{-- Data Role --}}
+                <!-- Data Role with improved icon -->
                 <li class="sidebar-item has-sub {{ $activeMenu == 'role' ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-flower1"></i>
+                        <i class="bi bi-person-badge-fill"></i>
                         <span>Data Role</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
                             <a href="{{ route('role.index') }}"
                                 class="submenu-link {{ $activeMenu == 'role' ? 'active' : '' }}">
-                                Daftar Role
+                                <i class="bi bi-list-check me-1"></i> Daftar Role
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                {{-- Data Jurusan --}}
+                <!-- Data Jurusan with improved icon -->
                 <li class="sidebar-item has-sub {{ $activeMenu == 'jurusan' ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-bookmarks-fill"></i>
+                        <i class="bi bi-building-fill"></i>
                         <span>Data Jurusan</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
                             <a href="{{ route('jurusan.index') }}"
                                 class="submenu-link {{ $activeMenu == 'jurusan' ? 'active' : '' }}">
-                                Daftar Jurusan
+                                <i class="bi bi-list-check me-1"></i> Daftar Jurusan
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                {{-- Data Prodi --}}
+                <!-- Data Prodi with improved icon -->
                 <li class="sidebar-item has-sub {{ $activeMenu == 'prodi' ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-bookmarks-fill"></i>
+                        <i class="bi bi-mortarboard-fill"></i>
                         <span>Data Program Studi</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
                             <a href="{{ route('prodi.index') }}"
                                 class="submenu-link {{ $activeMenu == 'prodi' ? 'active' : '' }}">
-                                Daftar Program Studi
+                                <i class="bi bi-list-check me-1"></i> Daftar Program Studi
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                {{-- Data User --}}
+                <!-- User Management Section -->
+                <li class="sidebar-title">
+                    <span>Manajemen Pengguna</span>
+                </li>
+
+                <!-- Data User with badge -->
                 <li class="sidebar-item {{ $activeMenu == 'user' ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
@@ -107,18 +116,18 @@
                     </a>
                 </li>
 
-                {{-- Data Mahasiswa --}}
+                <!-- Data Mahasiswa with badge -->
                 <li class="sidebar-item {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
                     <a href="{{ route('mahasiswa.index') }}" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
+                        <i class="bi bi-mortarboard"></i>
                         <span>Data Mahasiswa</span>
                     </a>
                 </li>
 
-                {{-- Data Admin --}}
+                <!-- Data Admin with badge -->
                 <li class="sidebar-item {{ $activeMenu == 'admin' ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
+                        <i class="bi bi-shield-lock-fill"></i>
                         <span>Data Admin</span>
                     </a>
                 </li>
