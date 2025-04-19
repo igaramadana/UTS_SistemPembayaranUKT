@@ -29,7 +29,7 @@ class AuthController extends Controller
             switch ($user->role->role_code) {
                 case 'ADM':
                     session()->flash('notification', [
-                        'message' => 'Login Berhasil, Selamat datang di halaman admin',
+                        'message' => 'Login Berhasil, Selamat datang ' . $user->role->role_nama,
                         'type' => 'success'
                     ]);
                     return redirect()->route('admin.index');

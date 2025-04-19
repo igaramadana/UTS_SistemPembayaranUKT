@@ -50,23 +50,36 @@
     <script src="{{ url('template/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ url('template/assets/static/js/pages/datatables.js') }}"></script>
     {{-- Toastify --}}
-    <script src="{{url('template/assets/extensions/toastify-js/src/toastify.js')}}"></script>
-    <script src="{{url('template/assets/static/js/pages/toastify.js')}}"></script>
+    <script src="{{ url('template/assets/extensions/toastify-js/src/toastify.js') }}"></script>
+    <script src="{{ url('template/assets/static/js/pages/toastify.js') }}"></script>
     {{-- Sweetalert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        function showNotification(message, type) {
+    @if (session('notification'))
+        <script>
             Toastify({
-                text: message,
+                text: "{{ session('notification.message') }}",
                 duration: 3000,
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: type === 'success' ? '#4CAF50' : '#F44336',
+                backgroundColor: "{{ session('notification.type') == 'success' ? '#4CAF50' : '#F44336' }}",
             }).showToast();
-        }
-    </script>
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            Toastify({
+                text: "{{ $errors->first() }}",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#F44336",
+            }).showToast();
+        </script>
+    @endif
 
     @stack('scripts')
 </body>

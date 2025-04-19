@@ -120,6 +120,15 @@ class UserController extends Controller
 
     public function delete(Request $request, string $id)
     {
+        $currentUser = auth()->user();
+        if ($currentUser->user_id == $id) {
+            showNotification('error', 'Anda tidak dapat menghapus akun sendiri');
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak dapat menghapus akun sendiri'
+            ], 403);
+        }
+
         $user = UserModel::find($id);
 
         if (!$user) {
