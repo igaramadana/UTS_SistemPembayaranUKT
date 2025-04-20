@@ -155,36 +155,15 @@
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-text-fill"></i>
-                        <span>Tagihan UKT</span>
-                    </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="tagihan.html" class="submenu-link">Kelola Tagihan</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="generatetagihan.html" class="submenu-link">Generate Tagihan</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="tunggakan.html" class="submenu-link">Tunggakan Pembayaran</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item has-sub">
-                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-gear-fill"></i>
                         <span>Pengaturan</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="tarif-ukt.html" class="submenu-link">Tarif UKT</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="tahun-akademik.html" class="submenu-link">Tahun Akademik</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="metode-bayar.html" class="submenu-link">Metode Pembayaran</a>
+                            <a href="{{ route('settings.index') }}"
+                                class="submenu-link {{ $activeMenu == 'tarif' ? 'active' : '' }}">
+                                <i class="bi bi-list-check me-1"></i> Tarif UKT
+                            </a>
                         </li>
                     </ul>
                 </li>

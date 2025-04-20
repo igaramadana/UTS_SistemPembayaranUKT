@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminDBController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Foundation\Console\RouteListCommand;
 
 /*
@@ -112,6 +113,21 @@ Route::middleware(['auth', 'role:ADM'])->prefix('admin')->group(function () {
         Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
         // Show Detail
         Route::get('/detail/{id}', [AdminController::class, 'show'])->name('admin.show');
+    });
+
+    // Settings
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/', [SettingController::class, 'index'])->name('settings.index');
+        Route::get('/list', [SettingController::class, 'list'])->name('settings.list');
+        Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
+        // Show Detail
+        Route::get('/detail/{id}', [SettingController::class, 'show'])->name('settings.show');
+        // Edit
+        Route::get('/{id}/edit', [SettingController::class, 'edit'])->name('settings.edit');
+        Route::put('/{id}/update', [SettingController::class, 'update'])->name('settings.update');
+        // Delete
+        Route::get('/{id}/delete', [SettingController::class, 'confirm'])->name('settings.confirm');
+        Route::delete('/{id}/delete', [SettingController::class, 'delete'])->name('settings.delete');
     });
 });
 
