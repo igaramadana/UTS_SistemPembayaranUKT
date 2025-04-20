@@ -133,7 +133,7 @@ class RoleController extends Controller
         }
     }
 
-    public function delete(Request $request, string $id)
+    public function delete(string $id)
     {
         $role = RoleModel::find($id);
 
