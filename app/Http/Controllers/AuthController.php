@@ -38,7 +38,7 @@ class AuthController extends Controller
                         'message' => 'Login Berhasil, Selamat datang ' . $user->role->role_nama,
                         'type' => 'success'
                     ]);
-                    return redirect()->route('admin.index');
+                    return redirect()->route('admin.dashboard');
 
                 default:
                     session()->flash('notification', [

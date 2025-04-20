@@ -18,4 +18,9 @@ class JurusanModel extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function prodi()
+    {
+        return $this->hasMany(ProdiModel::class, 'jurusan_id', 'jurusan_id');
+    }
 }

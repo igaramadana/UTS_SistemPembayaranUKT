@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminDBController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
@@ -21,10 +22,6 @@ use Illuminate\Foundation\Console\RouteListCommand;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
 Route::get('/avv', function () {
     return view('routefooter');
 })->name('avv');
@@ -40,6 +37,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'role:ADM'])->prefix('admin')->group(function () {
+    // Dashboard
+    Route::get('/', [AdminDBController::class, 'index'])->name('admin.dashboard');
     // Role
     Route::group(['prefix' => 'role'], function () {
         Route::get('/', [RoleController::class, 'index'])->name('role.index');

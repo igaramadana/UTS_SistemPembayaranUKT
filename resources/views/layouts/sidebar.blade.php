@@ -44,7 +44,7 @@
             <ul class="menu">
                 <!-- Dashboard -->
                 <li class="sidebar-item {{ $activeMenu == 'dashboard' ? 'active' : '' }}">
-                    <a href="{{ url('/') }}" class='sidebar-link'>
+                    <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
