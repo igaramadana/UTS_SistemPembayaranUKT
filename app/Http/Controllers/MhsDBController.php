@@ -98,8 +98,7 @@ class MhsDBController extends Controller
 
             // Prepare user data for update
             $userData = [];
-            
-            // Handle profile photo upload
+
             if ($request->hasFile('foto_profile')) {
                 if ($user->foto_profile) {
                     Storage::disk('public')->delete('foto_profile/' . $user->foto_profile);
@@ -145,7 +144,6 @@ class MhsDBController extends Controller
                 // Delete the photo from storage
                 Storage::disk('public')->delete('foto_profile/' . $user->foto_profile);
 
-                // Update the user record directly using the query builder
                 UserModel::where('user_id', $user->user_id)
                     ->update(['foto_profile' => null]);
 
