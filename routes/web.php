@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminDBController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MhsDBController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Foundation\Console\RouteListCommand;
 
@@ -133,7 +134,9 @@ Route::middleware(['auth', 'role:ADM'])->prefix('admin')->group(function () {
 
 
 Route::middleware(['auth', 'role:MHS'])->prefix('mahasiswa')->group(function () {
-    Route::get('/', function () {
-        return view('routefooter');
-    })->name('testing');
+    Route::get('/', [MhsDBController::class, 'index'])->name('mahasiswa.dashboard');
+    Route::get('/profile', [MhsDBController::class, 'profile'])->name('mahasiswa.profile');
+    Route::put('/profile/update', [MhsDBController::class, 'updateProfile'])->name('mahasiswa.profile.update');
+    // delete
+    Route::get('/profile/delete', [MhsDBController::class, 'deleteProfile'])->name('mahasiswa.profile.delete');
 });

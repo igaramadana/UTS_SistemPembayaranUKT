@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminModel;
 use App\Models\JurusanModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProdiModel;
@@ -34,18 +35,24 @@ class AuthController extends Controller
 
             switch ($user->role->role_code) {
                 case 'ADM':
+                    if ($user) {
+                        $admin = AdminModel::where('user_id', $user->user_id)->first();
+                    }
                     session()->flash('notification', [
-                        'message' => 'Login Berhasil, Selamat datang ' . $user->role->role_nama,
+                        'message' => 'Login Berhasil, Selamat datang ' . $admin->admin_nama,
                         'type' => 'success'
                     ]);
                     return redirect()->route('admin.dashboard');
 
                 default:
+                    if ($user) {
+                        $mahasiswa = MahasiswaModel::where('user_id', $user->user_id)->first();
+                    }
                     session()->flash('notification', [
-                        'message' => 'Login Berhasil Selamat datang ' . $user->email,
+                        'message' => 'Login Berhasil Selamat datang ' . $mahasiswa->mahasiswa_nama,
                         'type' => 'success'
                     ]);
-                    return redirect()->route('testing');
+                    return redirect()->route('mahasiswa.dashboard');
             }
         }
         return back()->withErrors([
@@ -100,7 +107,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         showNotification('Registrasi Berhasil', 'success');
-        return redirect()->route('testing')->with('success', 'Registrasi Berhasil');
+        return redirect()->route('mahasiswa.dashboard')->with('success', 'Registrasi Berhasil');
     }
 
     public function logout(Request $request)
