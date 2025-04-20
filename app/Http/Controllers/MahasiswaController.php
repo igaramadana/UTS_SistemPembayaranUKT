@@ -43,7 +43,7 @@ class MahasiswaController extends Controller
         $mahasiswa = MahasiswaModel::select('mahasiswa_id', 'user_id', 'nim', 'mahasiswa_nama', 'angkatan', 'mahasiswa_alamat', 'no_telepon', 'jenis_kelamin', 'prodi_id')
             ->with([
                 'user' => function ($query) {
-                    $query->select('user_id', 'email');
+                    $query->select('user_id', 'email', 'foto_profile');
                 },
                 'prodi' => function ($query) {
                     $query->select('prodi_id', 'prodi_nama');
@@ -54,7 +54,11 @@ class MahasiswaController extends Controller
         return DataTables::of($mahasiswa)
             ->addIndexColumn()
             ->addColumn('foto_profile', function ($mahasiswa) {
-                return '<img src="' . $this->avatar->create($mahasiswa->mahasiswa_nama)->tobase64() . '" width="50" class="avatar border border-3 border-primary">';
+                if ($mahasiswa->user && $mahasiswa->user->foto_profile) {
+                    return '<img src="' . asset('storage/foto_profile/' . $mahasiswa->user->foto_profile) . '" width="50" height="50" class="avatar border border-3 border-primary rounded-circle">';
+                } else {
+                    return '<img src="' . $this->avatar->create($mahasiswa->mahasiswa_nama)->tobase64() . '" width="50" class="avatar border border-3 border-primary rounded-circle">';
+                }
             })
             ->addColumn('action', function ($mahasiswa) {
                 $btn = '<a href="' . route('mahasiswa.show', $mahasiswa->mahasiswa_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
@@ -124,7 +128,11 @@ class MahasiswaController extends Controller
         $prodi = ProdiModel::select('prodi_id', 'prodi_nama')->get();
         $user = UserModel::find($mahasiswa->user_id);
 
-        $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
+        if ($user->foto_profile) {
+            $avatar = asset('storage/foto_profile/' . $user->foto_profile);
+        } else {
+            $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
+        }
 
         $breadcrumb = (object) [
             'title' => 'Mahasiswa',

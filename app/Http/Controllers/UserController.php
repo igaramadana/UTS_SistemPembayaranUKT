@@ -40,11 +40,14 @@ class UserController extends Controller
 
     public function list()
     {
-        $users = UserModel::select('user_id', 'role_id', 'email')->with('role')->get();
+        $users = UserModel::select('user_id', 'role_id', 'email', 'foto_profile')->with('role')->get();
 
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('foto_profile', function ($user) {
+                if ($user->foto_profile) {
+                    return '<img src="' . asset('storage/foto_profile/' . $user->foto_profile) . '" width="50" height="50" class="avatar border border-3 border-primary rounded-circle">';
+                }
                 if ($user->role_id == 1) {
                     $admin = AdminModel::where('user_id', $user->user_id)->first();
                     $nama = $admin ? $admin->admin_nama : $user->username;
@@ -56,7 +59,7 @@ class UserController extends Controller
                 }
 
                 $avatarImage = $this->avatar->create($nama)->setTheme('colorful')->toBase64();
-                return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary">';
+                return '<img src="' . $avatarImage . '" width="50" class="avatar border border-3 border-primary rounded-circle">';
             })
             ->addColumn('action', function ($user) {
                 $btn = '<a href="' . route('user.show', $user->user_id) . '" class="btn btn-primary btn-sm btn-edit">Detail</a> ';
@@ -89,7 +92,11 @@ class UserController extends Controller
             }
 
             $detailData = $mahasiswa;
-            $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
+            if ($user->foto_profile) {
+                $avatar = asset('storage/foto_profile/' . $user->foto_profile);
+            } else {
+                $avatar = $this->avatar->create($mahasiswa->mahasiswa_nama)->toBase64();
+            }
         } else {
             $avatar = $this->avatar->create($user->email)->toBase64();
         }
