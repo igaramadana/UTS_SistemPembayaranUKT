@@ -139,12 +139,6 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="transaksi.html" class="submenu-link">Transaksi Pembayaran</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="konfirmasi.html" class="submenu-link">Konfirmasi Pembayaran</a>
-                        </li>
-                        <li class="submenu-item">
                             <a href="riwayat.html" class="submenu-link">Riwayat Pembayaran</a>
                         </li>
                         <li class="submenu-item">
@@ -168,29 +162,7 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="notifikasi.html" class='sidebar-link'>
-                        <i class="bi bi-bell-fill"></i>
-                        <span>Notifikasi</span>
-                        <span class="badge bg-danger rounded-pill ms-auto">3</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-title">Akun</li>
-
-                <li class="sidebar-item">
-                    <a href="profil.html" class='sidebar-link'>
-                        <i class="bi bi-person-fill"></i>
-                        <span>Profil Admin</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a href="ganti-password.html" class='sidebar-link'>
-                        <i class="bi bi-shield-lock-fill"></i>
-                        <span>Ganti Password</span>
-                    </a>
-                </li>
+                <hr>
 
                 <li class="sidebar-item">
                     <a href="#" type="submit" class="sidebar-link" id="logout-link">
