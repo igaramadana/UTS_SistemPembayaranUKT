@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravolt/avatar": "^6.2",
+        "midtrans/midtrans-php": "^2.6",
         "yajra/laravel-datatables": "^10.1"
     },
     "require-dev": {

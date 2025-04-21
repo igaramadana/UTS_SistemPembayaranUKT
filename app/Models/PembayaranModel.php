@@ -20,6 +20,9 @@ class PembayaranModel extends Model
         'snap_token',
         'status_pembayaran'
     ];
+    protected $casts = [
+        'tanggal_pembayaran' => 'datetime',
+    ];
 
     public function mahasiswa()
     {

@@ -52,12 +52,12 @@
 
                 <li class="sidebar-title">Pembayaran</li>
 
-                <div class="sidebar-item">
-                    <a href="profil.html" class='sidebar-link'>
+                <li class="sidebar-item {{ $activeMenu == 'pembayaran' ? 'active' : '' }}">
+                    <a href="{{ route('mahasiswa.pembayaran') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>Bayar UKT</span>
                     </a>
-                </div>
+                </li>
 
                 <li class="sidebar-title">Akun</li>
 

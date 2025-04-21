@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminDBController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MahasiswaPembayaranController;
 use App\Http\Controllers\MhsDBController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\SettingController;
@@ -145,4 +146,12 @@ Route::middleware(['auth', 'role:MHS'])->prefix('mahasiswa')->group(function () 
     Route::put('/profile/update', [MhsDBController::class, 'updateProfile'])->name('mahasiswa.profile.update');
     // delete
     Route::get('/profile/delete', [MhsDBController::class, 'deleteProfile'])->name('mahasiswa.profile.delete');
+    // Pembayaran
+    Route::get('/pembayaran', [MahasiswaPembayaranController::class, 'index'])->name('mahasiswa.pembayaran');
+    Route::post('/pembayaran/pay', [MahasiswaPembayaranController::class, 'pay'])->name('mahasiswa.pembayaran.pay');
+    Route::get('/pembayaran/status/{order_id}', [MahasiswaPembayaranController::class, 'paymentStatus'])
+        ->name('mahasiswa.pembayaran.status');
+    // routes/web.php
+    Route::post('/pembayaran/notification', [MahasiswaPembayaranController::class, 'handleNotification'])
+        ->name('mahasiswa.pembayaran.notification');
 });
