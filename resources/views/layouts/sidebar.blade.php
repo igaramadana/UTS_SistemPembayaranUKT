@@ -132,14 +132,14 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item has-sub">
+                <li class="sidebar-item has-sub {{ $activeMenu == 'pembayaran' ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-cash-stack"></i>
                         <span>Pembayaran UKT</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="riwayat.html" class="submenu-link">Riwayat Pembayaran</a>
+                        <li class="submenu-item {{ $activeMenu == 'pembayaran' ? 'active' : '' }}">
+                            <a href="{{ route('pembayaran.index') }}" class="submenu-link">Riwayat Pembayaran</a>
                         </li>
                         <li class="submenu-item">
                             <a href="laporan.html" class="submenu-link">Laporan Keuangan</a>

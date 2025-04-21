@@ -10,6 +10,7 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MhsDBController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Foundation\Console\RouteListCommand;
 
@@ -129,6 +130,11 @@ Route::middleware(['auth', 'role:ADM'])->prefix('admin')->group(function () {
         // Delete
         Route::get('/{id}/delete', [SettingController::class, 'confirm'])->name('settings.confirm');
         Route::delete('/{id}/delete', [SettingController::class, 'delete'])->name('settings.delete');
+    });
+
+    Route::group(['prefix' => 'pembayaran'], function () {
+        Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
+        Route::get('/list', [PembayaranController::class, 'list'])->name('pembayaran.list');
     });
 });
 
