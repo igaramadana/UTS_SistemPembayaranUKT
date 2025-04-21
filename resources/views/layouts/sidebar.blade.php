@@ -141,9 +141,6 @@
                         <li class="submenu-item {{ $activeMenu == 'pembayaran' ? 'active' : '' }}">
                             <a href="{{ route('pembayaran.index') }}" class="submenu-link">Riwayat Pembayaran</a>
                         </li>
-                        <li class="submenu-item">
-                            <a href="laporan.html" class="submenu-link">Laporan Keuangan</a>
-                        </li>
                     </ul>
                 </li>
 
