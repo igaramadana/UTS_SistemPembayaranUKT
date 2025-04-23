@@ -70,7 +70,9 @@
                         },
                         {
                             data: 'tanggal_pembayaran',
-                            name: 'tanggal_pembayaran'
+                            name: 'tanggal_pembayaran',
+                            orderable: true,
+                            searchable: true,
                         },
                         {
                             data: 'nim',

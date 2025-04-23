@@ -54,7 +54,7 @@
 
                 <li class="sidebar-item {{ $activeMenu == 'pembayaran' ? 'active' : '' }}">
                     <a href="{{ route('mahasiswa.pembayaran') }}" class='sidebar-link'>
-                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-cash-coin me-2"></i>
                         <span>Bayar UKT</span>
                     </a>
                 </li>
