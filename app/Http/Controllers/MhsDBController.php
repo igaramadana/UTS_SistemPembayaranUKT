@@ -40,7 +40,7 @@ class MhsDBController extends Controller
         }
 
         $activeMenu = 'dashboard';
-        return view('mahasiswa.dashboard', compact('page', 'breadcrumb', 'activeMenu', 'mahasiswa', 'user', 'avatar'));
+        return view('Mahasiswa.dashboard', compact('page', 'breadcrumb', 'activeMenu', 'mahasiswa', 'user', 'avatar'));
     }
 
     public function profile()

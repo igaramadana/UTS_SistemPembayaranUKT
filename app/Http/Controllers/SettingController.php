@@ -24,7 +24,7 @@ class SettingController extends Controller
 
         $prodis = ProdiModel::all();
         $jurusans = JurusanModel::all();
-        return view('admin.tarif.index', compact('breadcrumb', 'page', 'activeMenu', 'prodis', 'jurusans'));
+        return view('Admin.tarif.index', compact('breadcrumb', 'page', 'activeMenu', 'prodis', 'jurusans'));
     }
 
     public function list()
@@ -83,7 +83,7 @@ class SettingController extends Controller
         $activeMenu = 'tarif';
 
         if ($ukt) {
-            return view('admin.tarif.show', compact('breadcrumb', 'page', 'activeMenu', 'ukt', 'prodi'));
+            return view('Admin.tarif.show', compact('breadcrumb', 'page', 'activeMenu', 'ukt', 'prodi'));
         } else {
             showNotification('error', 'Data Tarif UKT tidak ditemukan');
             return redirect()->route('tarif.index');
@@ -136,7 +136,7 @@ class SettingController extends Controller
         $prodi = ProdiModel::with('jurusan')->find($ukt->prodi_id);
 
         if ($ukt) {
-            return view('admin.tarif.confirm', compact('ukt', 'prodi'));
+            return view('Admin.tarif.confirm', compact('ukt', 'prodi'));
         } else {
             showNotification('error', 'Data Tarif UKT tidak ditemukan');
             return redirect()->route('tarif.index');
